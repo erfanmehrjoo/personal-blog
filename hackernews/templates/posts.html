@@ -7,6 +7,7 @@
         <p class="blog-post-meta"> {{post.created}} by <a href="#">{{request.user.username}}</a></p>
 
         {{post.content|safe}}
+        <hr/>
       {% endfor %}
 
 {% endblock post %}

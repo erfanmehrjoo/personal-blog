@@ -5,6 +5,8 @@ from django.contrib.auth.models import  User
 from django.contrib.auth import login , logout , authenticate
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
 from .models import Post
 # Create your views here.
 def login_custom(request):
@@ -53,6 +55,8 @@ def userchangepassword(request):
 
 def post_all(request):
     posts = Post.objects.all()
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    posts = posts.filter(title__icontains=q)
     paginator = Paginator(posts , 2)
 
     page_number = request.GET.get('page')
