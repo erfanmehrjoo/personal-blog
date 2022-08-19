@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import login_custom , logout_custom , register , userchangepassword , post_all
+from .views import login_custom , logout_custom , register , userchangepassword , post_all , post
 urlpatterns = [
     path('login/' , login_custom , name='login'),
     path('logout/' , logout_custom , name='logout'),
     path('register/'  , register , name='register'),
     path('changepassword/' , userchangepassword , name='changepassword'),
     path('posts/' , post_all , name='posts'),
+    path('post/<str:slug>' , post , name='post'),
 ]

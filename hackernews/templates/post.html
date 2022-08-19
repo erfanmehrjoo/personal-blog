@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block post %}
+      
+      <article class="blog-post">
+        <h2 class="blog-post-title mb-1">{{ post.title }}</h2>
+        <p class="blog-post-meta"> {{post.created}} by <a href="#">{{request.user.username}}</a></p>
+
+        {{post.content|safe}}
+      
+{% endblock post %}
+

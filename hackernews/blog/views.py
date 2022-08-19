@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserChangeForm , UserCreationForm , Passwo
 from django.contrib.auth.models import  User
 from django.contrib.auth import login , logout , authenticate
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import Post
 # Create your views here.
 def login_custom(request):
@@ -52,4 +53,12 @@ def userchangepassword(request):
 
 def post_all(request):
     posts = Post.objects.all()
-    return render(request , 'posts.html' , context={"posts":posts})
+    paginator = Paginator(posts , 2)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request , 'posts.html' , context={"page_obj":page_obj})
+
+def post(request , slug):
+    post = Post.objects.get(slug=slug)
+    return render(request , 'post.html' , context={"post":post})
