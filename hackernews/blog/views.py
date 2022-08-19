@@ -1,10 +1,11 @@
-import re
+from .models import Tag
 from django.shortcuts import render , redirect
 from django.contrib.auth.forms import UserChangeForm , UserCreationForm , PasswordChangeForm
 from django.contrib.auth.models import  User
 from django.contrib.auth import login , logout , authenticate
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 from .models import Post
@@ -54,14 +55,14 @@ def userchangepassword(request):
     return render(request , 'changepassword.html' , context={"form" : form})
 
 def post_all(request):
+    tags = Tag.objects.all()
     posts = Post.objects.all()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts = posts.filter(title__icontains=q)
+    posts = posts.filter(Q(title__icontains=q) | Q(tag__tagname__exact=q)) if q != '' else posts
     paginator = Paginator(posts , 2)
-
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request , 'posts.html' , context={"page_obj":page_obj})
+    return render(request , 'posts.html' , context={"page_obj":page_obj , "tags":tags})
 
 def post(request , slug):
     post = Post.objects.get(slug=slug)

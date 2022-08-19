@@ -93,10 +93,9 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     
           </ul>
-          <form class="d-flex"  action="" method="GET">
-            <input type="text" class="form-control form-control-sm mr-2" placeholder="Search" style="width: 60%;" name="q">
-            <input type="submit" class="btn btn-sm btn-outline-secondary" value="Search">
-          </form>
+          {% block search %}
+            
+          {% endblock search %}
         </div>
         {% if request.user.is_authenticated %}
         <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" style="height: 30%; width: 30%;">Log out</a>
@@ -110,18 +109,9 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 link-secondary" href="#">World</a>
-      <a class="p-2 link-secondary" href="#">U.S.</a>
-      <a class="p-2 link-secondary" href="#">Technology</a>
-      <a class="p-2 link-secondary" href="#">Design</a>
-      <a class="p-2 link-secondary" href="#">Culture</a>
-      <a class="p-2 link-secondary" href="#">Business</a>
-      <a class="p-2 link-secondary" href="#">Politics</a>
-      <a class="p-2 link-secondary" href="#">Opinion</a>
-      <a class="p-2 link-secondary" href="#">Science</a>
-      <a class="p-2 link-secondary" href="#">Health</a>
-      <a class="p-2 link-secondary" href="#">Style</a>
-      <a class="p-2 link-secondary" href="#">Travel</a>
+    {% block tag %}
+      
+    {% endblock tag %}
     </nav>
   </div>
 </div>

@@ -4,9 +4,18 @@ from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.utils import timezone
 # Create your models here.
+
+class Tag(models.Model):
+    tagname = models.CharField(max_length=50)
+    
+
+    def __str__(self):
+        return self.tagname
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField()
+    tag = models.ManyToManyField(Tag , blank=True)
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100 , unique=True , null=True , blank=True)
     created_date = models.DateTimeField(default=timezone.now)
