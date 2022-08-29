@@ -58,7 +58,7 @@ def post_all(request):
     tags = Tag.objects.all()
     posts = Post.objects.all()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts = posts.filter(Q(title__icontains=q) | Q(tag__tagname__exact=q)) if q != '' else posts
+    posts = posts.filter(Q(tag__tagname__icontains=q) | Q(title__icontains=q))
     paginator = Paginator(posts , 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

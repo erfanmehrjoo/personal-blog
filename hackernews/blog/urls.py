@@ -22,5 +22,6 @@ urlpatterns = [
     path('register/'  , register , name='register'),
     path('changepassword/' , userchangepassword , name='changepassword'),
     path('posts/' , post_all , name='posts'),
+    path('' , post_all , name='home'),
     path('post/<str:slug>' , post , name='post'),
 ]

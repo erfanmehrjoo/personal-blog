@@ -86,21 +86,19 @@
         <a class="link-secondary" href="https://erfanmehrjoo.ir">Profolio website</a>
       </div>
       <div class="col-4 text-center">
-        <a class="blog-header-logo text-dark" href="#">Large</a>
+        <p class="blog-header-logo text-dark">Geeks</p>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     
           </ul>
-          {% block search %}
-            
-          {% endblock search %}
+
         </div>
         {% if request.user.is_authenticated %}
         <a class="btn btn-sm btn-outline-secondary" href="{% url 'logout' %}" style="height: 30%; width: 30%;">Log out</a>
         {% else %}
-        <a class="btn btn-sm btn-outline-secondary" href="{% url 'register' %}"  style="height: 30%; width: 30%;">Sign up</a>
+        <a class="btn btn-sm btn-outline-secondary m-2" href="{% url 'register' %}"  style="height: 30%; width: 30%;">Sign up</a>
         <a class="btn btn-sm btn-outline-secondary" href="{% url 'login' %}"  style="height: 30%; width: 30%;">Login</a>
         {% endif %}
       </div>
@@ -109,9 +107,7 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-    {% block tag %}
-      
-    {% endblock tag %}
+
     </nav>
   </div>
 </div>
@@ -131,10 +127,12 @@
 
       {% endblock post %}
 
-      <nav class="blog-pagination" aria-label="Pagination">
-        {% block paginator %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-circle pg-blue">
+          {% block paginator %}
 
-        {% endblock paginator %}
+          {% endblock paginator %}
+        </ul>
       </nav>
 
     </div>
@@ -145,14 +143,28 @@
           <h4 class="fst-italic">About</h4>
           <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
         </div>
-        
-        <div class="p-4">
+
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">Search</h4>
+          {% block search %}
+            
+          {% endblock search %}
+        </div>
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">Tags</h4>
+          {% block tag %}
+      
+          {% endblock tag %}
+        </div>
+        <div class="p-8">
+          <div class="p-4 mb-3 bg-light rounded">
           <h4 class="fst-italic">Elsewhere</h4>
-          <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
-          </ol>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
         </div>
       </div>
     </div>
@@ -193,8 +205,8 @@
       </div>
 </main>
 
-<footer class="blog-footer">
-  <p>طراحی و توسعه با ❤️ توسط Erfan mehrjoo</p>
+<footer class="blog-footer md-2">
+  <p>طراحی و توسعه با ☕ توسط Erfan mehrjoo</p>
 </footer>
 
 
