@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import login_custom , logout_custom , register , userchangepassword , post_all , post
+from .views import login_custom , logout_custom , register , userchangepassword , post_all , post , tagfillter
 urlpatterns = [
     path('login/' , login_custom , name='login'),
     path('logout/' , logout_custom , name='logout'),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('posts/' , post_all , name='posts'),
     path('' , post_all , name='home'),
     path('post/<str:slug>' , post , name='post'),
+    path('tag/<str:tag>' , tagfillter , name='tag'),
 ]

@@ -58,7 +58,10 @@ def post_all(request):
     tags = Tag.objects.all()
     posts = Post.objects.all()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts = posts.filter(Q(tag__tagname__icontains=q) | Q(title__icontains=q))
+    posts = posts.filter(Q(title__icontains=q)) if q != '' else posts
+    for post in posts:
+        print(post.title)
+        
     paginator = Paginator(posts , 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -67,3 +70,13 @@ def post_all(request):
 def post(request , slug):
     post = Post.objects.get(slug=slug)
     return render(request , 'post.html' , context={"post":post})
+
+def tagfillter(request , tag):
+    tags = Tag.objects.all()
+    posts = Post.objects.all()
+    posts = posts.filter(tag__tagname__icontains=tag)
+        
+    paginator = Paginator(posts , 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request , 'tag.html' , context={"page_obj":page_obj , "tags":tags})

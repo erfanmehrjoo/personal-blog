@@ -2,14 +2,11 @@
 {% load static %}
 
 {% block search %}
-<form class="d-flex"  action="" method="GET">
-  <input type="text" class="form-control form-control-sm mr-2" placeholder="Search" style="width: 60%;" name="q">
-  <input type="submit" class="btn btn-sm btn-outline-secondary" value="Search">
-</form>
+    <p>{{ request.user }} Good to see you</p>
 {% endblock search %}
 {% block tag %}
   {% for tag in tags %}
-  <a class="p-2 link-secondary" href="{% url 'tag' tag.tagname %}">{{ tag }}</a>
+  <a class="p-2 link-secondary" href="?q={{tag}}">{{ tag }}</a>
   {% endfor %}
 {% endblock tag %}
 {% block post %}
