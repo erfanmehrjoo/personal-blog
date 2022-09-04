@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'rest_framework',
     'ckeditor',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +73,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hackernews.wsgi.application'
 
-
+REST_FRAMEWORK = {
+        'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+    ],
+}
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

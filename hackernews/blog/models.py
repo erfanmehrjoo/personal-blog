@@ -16,6 +16,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = RichTextField()
     tag = models.ManyToManyField(Tag , blank=True)
+    thumnail = models.ImageField(default = 'thumnail.jpg' , blank = True , null = True)
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     slug = models.SlugField(max_length=100 , unique=True , null=True , blank=True)
     created_date = models.DateTimeField(default=timezone.now)
