@@ -57,15 +57,21 @@ def userchangepassword(request):
 def post_all(request):
     tags = Tag.objects.all()
     posts = Post.objects.all()
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-    posts = posts.filter(Q(title__icontains=q)) if q != '' else posts
     for post in posts:
         print(post.title)
+    lastonoe = posts[::-1]
+    latest = lastonoe[0]
+    print('before.................')
+    print(latest)
+    print('afther.................')
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    posts = posts.filter(Q(title__icontains=q)) if q != '' else posts
+
         
     paginator = Paginator(posts , 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request , 'posts.html' , context={"page_obj":page_obj , "tags":tags})
+    return render(request , 'posts.html' , context={"page_obj":page_obj , "tags":tags , 'latest':latest})
 
 def post(request , slug):
     post = Post.objects.get(slug=slug)
