@@ -21,7 +21,9 @@ router = routers.SimpleRouter()
 router.register('posts' , PostVieSet , basename='posts')
 router.register('tags' , TagVieSet , basename='tags')
 urlpatterns = [
-    path('' , include(router.urls))
+    path('' , include(router.urls)),
+    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
 ]
 
 
